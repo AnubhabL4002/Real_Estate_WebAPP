@@ -126,8 +126,3 @@ Before deploying to production:
 
 ---
 
-## 📞 Contact
-
-**Capital Consultancy Services**
-14, Janpath Road, Connaught Place, New Delhi – 110001
-Phone: +91 98765 43210
