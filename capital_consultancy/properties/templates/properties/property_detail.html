@@ -1,0 +1,429 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ property.name }} | Capital Consultancy Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+<style>
+  .detail-hero {
+    padding-top: 80px;
+    min-height: 480px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .detail-hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to top, rgba(11,22,40,0.95) 0%, rgba(11,22,40,0.4) 60%, rgba(11,22,40,0.3) 100%),
+      url('{{ property.image_url }}') center/cover no-repeat;
+  }
+  .detail-hero-content {
+    position: relative; z-index: 2;
+    padding: 60px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .detail-breadcrumb {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); margin-bottom: 16px;
+  }
+  .detail-breadcrumb a { color: var(--gold); text-decoration: none; }
+  .detail-breadcrumb a:hover { text-decoration: underline; }
+  .detail-tag {
+    display: inline-block;
+    padding: 4px 14px; margin-bottom: 16px;
+    font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  }
+  .detail-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px); font-weight: 300;
+    color: var(--white); line-height: 1.1; margin-bottom: 12px;
+  }
+  .detail-location {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: rgba(255,255,255,0.55);
+  }
+  .detail-price-bar {
+    background: var(--navy);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .detail-price-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 24px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .detail-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px; font-weight: 500; color: var(--gold);
+  }
+  .detail-price-label {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--grey); margin-bottom: 4px;
+  }
+  .detail-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .detail-body {
+    max-width: 1200px; margin: 0 auto;
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+    align-items: start;
+  }
+  .detail-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400; color: var(--navy);
+    margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .detail-desc {
+    font-size: 14px; line-height: 1.95; color: var(--text-mid);
+    margin-bottom: 40px;
+  }
+  .detail-specs-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--cream-dark);
+    margin-bottom: 40px;
+  }
+  .detail-spec {
+    background: var(--white); padding: 20px 16px; text-align: center;
+  }
+  .detail-spec-icon { font-size: 22px; margin-bottom: 8px; }
+  .detail-spec-val {
+    font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 4px;
+  }
+  .detail-spec-key {
+    font-size: 9px; color: var(--grey); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .detail-features-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-bottom: 40px;
+  }
+  .detail-feature-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; color: var(--text-mid); letter-spacing: 0.3px;
+  }
+  .detail-feature-item::before {
+    content: '✦'; color: var(--gold); font-size: 10px; flex-shrink: 0;
+  }
+  /* Sidebar */
+  .detail-sidebar { position: sticky; top: 100px; }
+  .sidebar-card {
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.07);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .sidebar-card-header {
+    background: var(--navy);
+    padding: 20px 24px;
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .sidebar-card-body { padding: 24px; }
+  .agent-profile {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+  }
+  .agent-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600; color: var(--navy); flex-shrink: 0;
+  }
+  .agent-name {
+    font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 3px;
+  }
+  .agent-title {
+    font-size: 10px; color: var(--grey); letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .agent-phone-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--navy); text-decoration: none;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    transition: all 0.3s; margin-bottom: 10px;
+  }
+  .agent-phone-btn:hover { box-shadow: 0 6px 20px rgba(201,168,76,0.4); }
+  .agent-whatsapp-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 13px;
+    background: #25D366; color: var(--white); text-decoration: none;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .agent-whatsapp-btn:hover { background: #1ebe5d; }
+  .sidebar-info-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--cream-dark);
+    font-size: 12px;
+  }
+  .sidebar-info-row:last-child { border-bottom: none; }
+  .sidebar-info-row span:first-child { color: var(--grey); letter-spacing: 0.5px; }
+  .sidebar-info-row span:last-child { font-weight: 600; color: var(--navy); }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--navy); text-decoration: none; margin-bottom: 40px;
+    border-bottom: 1px solid transparent; transition: border-color 0.3s, color 0.3s;
+  }
+  .back-link:hover { color: var(--gold-dark); border-color: var(--gold); }
+
+  @media (max-width: 1024px) {
+    .detail-hero-content { padding: 40px 30px; }
+    .detail-price-inner { padding: 20px 30px; }
+    .detail-body { padding: 40px 30px; grid-template-columns: 1fr; }
+    .detail-sidebar { position: static; }
+  }
+  @media (max-width: 768px) {
+    .detail-hero-content { padding: 40px 20px; }
+    .detail-price-inner { padding: 20px; }
+    .detail-body { padding: 40px 20px; }
+    .detail-specs-grid { grid-template-columns: repeat(2, 1fr); }
+    .detail-features-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="{% url 'home' %}" class="nav-logo">
+    <span class="nav-logo-main">Capital Consultancy</span>
+    <span class="nav-logo-sub">Premium Real Estate Services</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="{% url 'home' %}#about">About</a></li>
+    <li><a href="{% url 'home' %}#listings">Properties</a></li>
+    <li><a href="{% url 'home' %}#services">Services</a></li>
+    <li><a href="{% url 'home' %}#testimonials">Testimonials</a></li>
+    <li><a href="{% url 'home' %}#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+919876543210" class="nav-phone">
+    <span class="nav-phone-icon">📞</span>
+    <span class="nav-phone-text">+91 98765 43210</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="detail-hero">
+  <div class="detail-hero-bg"></div>
+  <div class="detail-hero-content">
+    <div class="detail-breadcrumb">
+      <a href="{% url 'home' %}">Home</a> &nbsp;/&nbsp;
+      <a href="{% url 'home' %}#listings">Properties</a> &nbsp;/&nbsp;
+      {{ property.name }}
+    </div>
+    <span class="detail-tag {{ property.tag_class }}">{{ property.tag }}</span>
+    <h1 class="detail-title">{{ property.name }}</h1>
+    <div class="detail-location">
+      📍 {{ property.location }}
+    </div>
+  </div>
+</div>
+
+<!-- PRICE BAR -->
+<div class="detail-price-bar">
+  <div class="detail-price-inner">
+    <div>
+      <div class="detail-price-label">Listed Price</div>
+      <div class="detail-price">{{ property.price }}</div>
+    </div>
+    <div class="detail-actions">
+      <a href="tel:{{ property.contact }}" class="btn-primary">📞 Call Agent</a>
+      <a href="{% url 'home' %}#contact" class="btn-outline">Book Site Visit</a>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="detail-body">
+  <!-- Main Content -->
+  <div>
+    <a href="{% url 'home' %}#listings" class="back-link">← Back to Listings</a>
+
+    <h2 class="detail-section-title">Property Overview</h2>
+    <p class="detail-desc">{{ property.description }}</p>
+
+    <h2 class="detail-section-title">Specifications</h2>
+    <div class="detail-specs-grid">
+      <div class="detail-spec">
+        <div class="detail-spec-icon">🛏</div>
+        <div class="detail-spec-val">{{ property.beds }}</div>
+        <div class="detail-spec-key">Bedrooms</div>
+      </div>
+      <div class="detail-spec">
+        <div class="detail-spec-icon">🚿</div>
+        <div class="detail-spec-val">{{ property.baths }}</div>
+        <div class="detail-spec-key">Bathrooms</div>
+      </div>
+      <div class="detail-spec">
+        <div class="detail-spec-icon">📐</div>
+        <div class="detail-spec-val">{{ property.area }}</div>
+        <div class="detail-spec-key">Total Area</div>
+      </div>
+      <div class="detail-spec">
+        <div class="detail-spec-icon">🏢</div>
+        <div class="detail-spec-val">{{ property.floor }}</div>
+        <div class="detail-spec-key">Floor</div>
+      </div>
+    </div>
+
+    <h2 class="detail-section-title">Amenities & Features</h2>
+    <div class="detail-features-grid">
+      <div class="detail-feature-item">24/7 Security & CCTV Surveillance</div>
+      <div class="detail-feature-item">Covered Parking Space</div>
+      <div class="detail-feature-item">Power Backup (Full Building)</div>
+      <div class="detail-feature-item">Modular Kitchen</div>
+      <div class="detail-feature-item">Gymnasium & Fitness Centre</div>
+      <div class="detail-feature-item">Children's Play Area</div>
+      <div class="detail-feature-item">Landscaped Gardens</div>
+      <div class="detail-feature-item">Community Hall / Club House</div>
+      <div class="detail-feature-item">High-Speed Elevators</div>
+      <div class="detail-feature-item">Visitor Parking</div>
+      <div class="detail-feature-item">Water Softener Plant</div>
+      <div class="detail-feature-item">Fire Safety Systems</div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="detail-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">Contact Agent</div>
+      <div class="sidebar-card-body">
+        <div class="agent-profile">
+          <div class="agent-avatar">{{ property.agent_initials }}</div>
+          <div>
+            <div class="agent-name">{{ property.agent }}</div>
+            <div class="agent-title">Senior Property Consultant</div>
+          </div>
+        </div>
+        <a href="tel:{{ property.contact }}" class="agent-phone-btn">
+          📞 {{ property.contact }}
+        </a>
+        <a href="https://wa.me/{{ property.contact|cut:' '|cut:'+' }}" target="_blank" class="agent-whatsapp-btn">
+          💬 WhatsApp Agent
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">Property Details</div>
+      <div class="sidebar-card-body">
+        <div class="sidebar-info-row">
+          <span>Listing Type</span>
+          <span>{{ property.tag }}</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span>Bedrooms</span>
+          <span>{{ property.beds }}</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span>Bathrooms</span>
+          <span>{{ property.baths }}</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span>Total Area</span>
+          <span>{{ property.area }}</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span>Floor</span>
+          <span>{{ property.floor }}</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span>Location</span>
+          <span>{{ property.location }}</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span>Price</span>
+          <span>{{ property.price }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">Our Office</div>
+      <div class="sidebar-card-body">
+        <div class="sidebar-info-row">
+          <span>Address</span>
+          <span>14, Janpath Road, CP</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span>Phone</span>
+          <span>+91 98765 43210</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span>Hours</span>
+          <span>Mon–Sat 9:30–7:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Capital Consultancy</div>
+      <div class="footer-brand-tag">Premium Real Estate Services</div>
+      <p class="footer-desc">Since 2001, we have helped thousands of families and investors make smart real estate decisions across New Delhi and the NCR region.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">f</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">tw</a>
+        <a href="#" class="social-btn">ig</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Properties</div>
+      <ul class="footer-links">
+        <li><a href="{% url 'home' %}#listings">Apartments</a></li>
+        <li><a href="{% url 'home' %}#listings">Villas & Bungalows</a></li>
+        <li><a href="{% url 'home' %}#listings">Commercial Spaces</a></li>
+        <li><a href="{% url 'home' %}#listings">New Launches</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="{% url 'home' %}#services">Residential Sales</a></li>
+        <li><a href="{% url 'home' %}#services">Commercial Leasing</a></li>
+        <li><a href="{% url 'home' %}#services">Investment Advisory</a></li>
+        <li><a href="{% url 'home' %}#services">Property Management</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'home' %}#about">About Us</a></li>
+        <li><a href="{% url 'home' %}#contact">Contact Us</a></li>
+        <li><a href="/admin/">Admin Panel</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Capital Consultancy Services Pvt. Ltd. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">RERA Compliance</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+</script>
+</body>
+</html>

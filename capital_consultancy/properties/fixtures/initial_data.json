@@ -1,0 +1,180 @@
+[
+  {
+    "model": "properties.property",
+    "pk": 1,
+    "fields": {
+      "name": "The Pinnacle Residences",
+      "location": "Vasant Vihar, New Delhi",
+      "price": "₹3.8 Crore",
+      "listing_type": "sale",
+      "tag": "For Sale",
+      "tag_class": "badge-sale",
+      "beds": "4",
+      "baths": "3",
+      "area": "2,800 sq.ft",
+      "floor": "12th",
+      "contact": "+91 98100 11223",
+      "agent": "Rahul Sinha",
+      "image_url": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80",
+      "description": "An exquisite 4BHK apartment in the prestigious Vasant Vihar neighbourhood. Features panoramic city views, Italian marble flooring, modular kitchen, and world-class amenities including a rooftop pool, gymnasium, and 24/7 concierge service.",
+      "is_featured": true
+    }
+  },
+  {
+    "model": "properties.property",
+    "pk": 2,
+    "fields": {
+      "name": "Emerald Bay Apartments",
+      "location": "Dwarka Sector 21, New Delhi",
+      "price": "₹85,000/mo",
+      "listing_type": "rent",
+      "tag": "For Rent",
+      "tag_class": "badge-rent",
+      "beds": "3",
+      "baths": "2",
+      "area": "1,950 sq.ft",
+      "floor": "7th",
+      "contact": "+91 98100 22334",
+      "agent": "Priyanka Das",
+      "image_url": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80",
+      "description": "Spacious 3BHK fully furnished apartment in Dwarka's most sought-after complex. Walking distance to the metro, surrounded by green spaces, with dedicated parking and 24/7 security.",
+      "is_featured": true
+    }
+  },
+  {
+    "model": "properties.property",
+    "pk": 3,
+    "fields": {
+      "name": "Grand Palazzo Suite",
+      "location": "Lutyens' Delhi, New Delhi",
+      "price": "₹9.5 Crore",
+      "listing_type": "sale",
+      "tag": "New Launch",
+      "tag_class": "badge-new",
+      "beds": "5",
+      "baths": "5",
+      "area": "5,200 sq.ft",
+      "floor": "Penthouse",
+      "contact": "+91 98100 33445",
+      "agent": "Ankit Sharma",
+      "image_url": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80",
+      "description": "Ultra-luxury penthouse in the heart of Lutyens' Delhi. Designed by award-winning architects, this palatial residence offers private terrace gardens, smart home automation, and an exclusive address in India's most prestigious neighbourhood.",
+      "is_featured": true
+    }
+  },
+  {
+    "model": "properties.property",
+    "pk": 4,
+    "fields": {
+      "name": "Skyline Heights",
+      "location": "Gurugram Sector 54, Haryana",
+      "price": "₹1.6 Crore",
+      "listing_type": "sale",
+      "tag": "For Sale",
+      "tag_class": "badge-sale",
+      "beds": "3",
+      "baths": "2",
+      "area": "1,650 sq.ft",
+      "floor": "9th",
+      "contact": "+91 98100 44556",
+      "agent": "Meena Kapoor",
+      "image_url": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=80",
+      "description": "Modern 3BHK apartment in Gurugram's premium tech corridor. Surrounded by multinational offices, world-class malls, and excellent connectivity to Delhi via NH-48.",
+      "is_featured": true
+    }
+  },
+  {
+    "model": "properties.property",
+    "pk": 5,
+    "fields": {
+      "name": "The Heritage Villas",
+      "location": "Greater Noida West, UP",
+      "price": "₹72,000/mo",
+      "listing_type": "rent",
+      "tag": "For Rent",
+      "tag_class": "badge-rent",
+      "beds": "4",
+      "baths": "3",
+      "area": "3,100 sq.ft",
+      "floor": "Ground",
+      "contact": "+91 98100 55667",
+      "agent": "Vijay Gupta",
+      "image_url": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80",
+      "description": "Expansive independent villa with private garden, swimming pool, and servant quarters. Located in Greater Noida West's most exclusive gated township with club facilities.",
+      "is_featured": true
+    }
+  },
+  {
+    "model": "properties.property",
+    "pk": 6,
+    "fields": {
+      "name": "Meridian Business Tower",
+      "location": "Connaught Place, New Delhi",
+      "price": "₹4.2 Crore",
+      "listing_type": "sale",
+      "tag": "New Launch",
+      "tag_class": "badge-new",
+      "beds": "—",
+      "baths": "—",
+      "area": "2,400 sq.ft",
+      "floor": "5th",
+      "contact": "+91 98100 66778",
+      "agent": "Sneha Joshi",
+      "image_url": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80",
+      "description": "Premium commercial office space in Delhi's iconic business district. Fully fitted Grade-A workspace with floor-to-ceiling glazing, dedicated parking, conference facilities, and prime CP address.",
+      "is_featured": true
+    }
+  },
+  {
+    "model": "properties.testimonial",
+    "pk": 1,
+    "fields": {
+      "name": "Arjun Mehta",
+      "role": "Homeowner, Vasant Kunj",
+      "text": "Capital Consultancy made finding our dream home in South Delhi an absolute delight. Their team was professional, patient, and incredibly knowledgeable about the market.",
+      "avatar_url": "https://i.pravatar.cc/100?img=12",
+      "rating": 5,
+      "is_active": true,
+      "order": 1
+    }
+  },
+  {
+    "model": "properties.testimonial",
+    "pk": 2,
+    "fields": {
+      "name": "Priya Sharma",
+      "role": "Investor, Gurugram",
+      "text": "As a first-time investor, I was nervous. The team guided me through every step, from market analysis to final registration. My property has already appreciated 22% in two years.",
+      "avatar_url": "https://i.pravatar.cc/100?img=25",
+      "rating": 5,
+      "is_active": true,
+      "order": 2
+    }
+  },
+  {
+    "model": "properties.testimonial",
+    "pk": 3,
+    "fields": {
+      "name": "Rakesh Verma",
+      "role": "Director, TechVenture Ltd.",
+      "text": "We relocated from Mumbai and needed a premium office space in Connaught Place. Capital Consultancy found the perfect fit within 10 days. Exceptional service and expertise.",
+      "avatar_url": "https://i.pravatar.cc/100?img=33",
+      "rating": 5,
+      "is_active": true,
+      "order": 3
+    }
+  },
+  {
+    "model": "properties.testimonial",
+    "pk": 4,
+    "fields": {
+      "name": "Sunita Kapoor",
+      "role": "NRI Investor, London",
+      "text": "The property management services are outstanding. They handle everything so I can focus on my business. Transparent reporting and professional tenant relationships.",
+      "avatar_url": "https://i.pravatar.cc/100?img=47",
+      "rating": 5,
+      "is_active": true,
+      "order": 4
+    }
+  }
+]

@@ -1,0 +1,502 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capital Consultancy Services | Premium Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+</head>
+<body>
+
+<!-- ──────── NAVBAR ──────── -->
+<nav id="navbar">
+  <a href="{% url 'home' %}" class="nav-logo">
+    <span class="nav-logo-main">Capital Consultancy</span>
+    <span class="nav-logo-sub">Premium Real Estate Services</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#listings">Properties</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+919876543210" class="nav-phone">
+    <span class="nav-phone-icon">📞</span>
+    <span class="nav-phone-text">+91 98765 43210</span>
+  </a>
+</nav>
+
+<!-- ──────── HERO ──────── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Established 2001 · New Delhi</p>
+    <h1 class="hero-title">Your Dream Property<br><em>Awaits You</em></h1>
+    <p class="hero-subtitle">Capital Consultancy Services connects discerning buyers and investors with India's finest residential and commercial real estate.</p>
+    <div class="hero-cta-group">
+      <a href="#listings" class="btn-primary">Explore Properties</a>
+      <a href="#contact" class="btn-outline">Book Consultation</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ──────── STATS ──────── -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-number" data-target="850">0</div>
+      <div class="stat-label">Properties Sold</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="24">0</div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="1200">0</div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="98">0</div>
+      <div class="stat-label">Satisfaction Rate %</div>
+    </div>
+  </div>
+</div>
+
+<!-- ──────── ABOUT ──────── -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-image-wrap">
+      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Capital Consultancy Services">
+      <div class="about-image-frame"></div>
+      <div class="about-image-badge">
+        <strong>24</strong>
+        <span>Years</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <span class="section-tag">Who We Are</span>
+      <h2 class="section-title">India's Most <em>Trusted</em><br>Property Advisors</h2>
+      <p>Founded in 2001, Capital Consultancy Services has established itself as one of New Delhi's premier real estate consultancies, with an unwavering commitment to excellence, integrity, and client satisfaction.</p>
+      <p>We handle everything from luxury residential apartments to commercial spaces, guiding our clients through every step of the property journey with transparency and expertise.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="af-icon">🏛️</div>
+          <div class="af-text"><strong>Legal Expertise</strong><span>Full documentation support and legal verification</span></div>
+        </div>
+        <div class="about-feature">
+          <div class="af-icon">📊</div>
+          <div class="af-text"><strong>Market Analysis</strong><span>Data-driven insights for smart investments</span></div>
+        </div>
+        <div class="about-feature">
+          <div class="af-icon">🤝</div>
+          <div class="af-text"><strong>Trusted Network</strong><span>Top builders & developers across India</span></div>
+        </div>
+        <div class="about-feature">
+          <div class="af-icon">🔑</div>
+          <div class="af-text"><strong>End-to-End Support</strong><span>From search to key handover, we're with you</span></div>
+        </div>
+      </div>
+      <a href="#contact" class="btn-primary">Schedule a Meeting</a>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── LISTINGS ──────── -->
+<section class="listings" id="listings">
+  <div class="section-header">
+    <div class="section-tag">Our Portfolio</div>
+    <h2 class="section-title">Featured <em>Properties</em></h2>
+    <p class="section-desc">Handpicked residences across Delhi NCR's most sought-after addresses, curated for comfort, luxury, and lasting value.</p>
+  </div>
+  <div class="listings-grid">
+    {% for property in properties %}
+    <div class="property-card" onclick="openModal({{ property.id }})" data-detail-url="{% url 'property_detail' property.id %}">
+      <div class="card-img">
+        <img src="{{ property.image_url }}" alt="{{ property.name }}" loading="lazy">
+        <span class="card-badge {{ property.tag_class }}">{{ property.tag }}</span>
+        <div class="card-price">{{ property.price }}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">{{ property.name }}</div>
+        <div class="card-location">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          {{ property.location }}
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-specs">
+          <div class="spec">
+            <span class="spec-icon">🛏</span>
+            <span class="spec-val">{{ property.beds }}</span>
+            <span class="spec-key">Beds</span>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">🚿</span>
+            <span class="spec-val">{{ property.baths }}</span>
+            <span class="spec-key">Baths</span>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">📐</span>
+            <span class="spec-val">{{ property.area }}</span>
+            <span class="spec-key">Sq.Ft</span>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">🏢</span>
+            <span class="spec-val">{{ property.floor }}</span>
+            <span class="spec-key">Floor</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-contact">
+            <div class="card-contact-icon">📞</div>
+            <div>
+              <div class="card-phone">{{ property.contact }}</div>
+              <div class="card-phone-label">Call Agent</div>
+            </div>
+          </div>
+          <a class="card-btn" href="{% url 'property_detail' property.id %}" onclick="event.stopPropagation()">View Details</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--grey);">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:24px;">No properties listed yet.</p>
+      <p style="font-size:13px;margin-top:8px;">Please add properties via the admin panel.</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ──────── SERVICES ──────── -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-tag" style="color:var(--gold)">What We Offer</div>
+    <h2 class="section-title" style="color:var(--white)">Our <em style="color:var(--gold-light)">Services</em></h2>
+    <p class="section-desc">Comprehensive real estate solutions tailored to your needs.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-item">
+      <div class="service-icon">🏠</div>
+      <div class="service-name">Residential Sales</div>
+      <div class="service-desc">Apartments, villas, and independent houses across premium Delhi NCR locations.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">🏢</div>
+      <div class="service-name">Commercial Leasing</div>
+      <div class="service-desc">Office spaces, retail units, and warehouses for businesses of every scale.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">📈</div>
+      <div class="service-name">Investment Advisory</div>
+      <div class="service-desc">Maximize your returns with expert market analysis and portfolio planning.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">📋</div>
+      <div class="service-name">Property Management</div>
+      <div class="service-desc">Hassle-free maintenance, tenant management, and rental collection services.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── TESTIMONIALS ──────── -->
+<section class="testimonials" id="testimonials">
+  <div class="section-header">
+    <div class="section-tag">Client Stories</div>
+    <h2 class="section-title">What Our Clients <em>Say</em></h2>
+    <p class="section-desc">Real experiences from families and investors who trusted us with their most important decisions.</p>
+  </div>
+  <div class="testimonials-slider-wrap">
+    <button class="slider-arrow slider-prev" id="sliderPrev">&#8592;</button>
+    <div class="testimonials-track" id="testimonialsTrack">
+      {% for t in testimonials %}
+      <div class="testimonial-card">
+        <div class="test-quote">"</div>
+        <p class="test-text">{{ t.text }}</p>
+        <div class="test-author">
+          {% if t.avatar_url %}
+          <img src="{{ t.avatar_url }}" alt="{{ t.name }}" class="test-avatar">
+          {% else %}
+          <div class="test-avatar-placeholder">{{ t.name|first }}</div>
+          {% endif %}
+          <div>
+            <div class="test-name">{{ t.name }}</div>
+            <div class="test-role">{{ t.role }}</div>
+          </div>
+          <div class="test-stars">{{ t.stars }}</div>
+        </div>
+      </div>
+      {% empty %}
+      <!-- Default testimonials if none in DB -->
+      <div class="testimonial-card">
+        <div class="test-quote">"</div>
+        <p class="test-text">Capital Consultancy made finding our dream home in South Delhi an absolute delight. Their team was professional, patient, and incredibly knowledgeable about the market.</p>
+        <div class="test-author">
+          <img src="https://i.pravatar.cc/100?img=12" alt="Arjun Mehta" class="test-avatar">
+          <div><div class="test-name">Arjun Mehta</div><div class="test-role">Homeowner, Vasant Kunj</div></div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="test-quote">"</div>
+        <p class="test-text">As a first-time investor, I was nervous. The team guided me through every step. My property has already appreciated 22% in two years.</p>
+        <div class="test-author">
+          <img src="https://i.pravatar.cc/100?img=25" alt="Priya Sharma" class="test-avatar">
+          <div><div class="test-name">Priya Sharma</div><div class="test-role">Investor, Gurugram</div></div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="test-quote">"</div>
+        <p class="test-text">We relocated from Mumbai and needed a premium office space in CP. Capital Consultancy found the perfect fit within 10 days. Exceptional service.</p>
+        <div class="test-author">
+          <img src="https://i.pravatar.cc/100?img=33" alt="Rakesh Verma" class="test-avatar">
+          <div><div class="test-name">Rakesh Verma</div><div class="test-role">Director, TechVenture Ltd.</div></div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="test-quote">"</div>
+        <p class="test-text">The property management services are outstanding. Transparent reporting and professional tenant relationships. Highly recommended.</p>
+        <div class="test-author">
+          <img src="https://i.pravatar.cc/100?img=47" alt="Sunita Kapoor" class="test-avatar">
+          <div><div class="test-name">Sunita Kapoor</div><div class="test-role">NRI Investor, London</div></div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div><!-- end testimonials-track -->
+    <button class="slider-arrow slider-next" id="sliderNext">&#8594;</button>
+  </div><!-- end testimonials-slider-wrap -->
+    <!-- SUBMIT YOUR REVIEW -->
+  <div class="review-submit-wrap">
+    <div class="review-submit-box">
+      <div class="review-submit-left">
+        <div class="section-tag" style="margin-bottom:12px;">Share Your Experience</div>
+        <h3 class="review-submit-title">Had a great experience<br>with us? <em>Tell the world.</em></h3>
+        <p class="review-submit-desc">Your review helps others make confident property decisions. All reviews are verified before publishing.</p>
+        <div class="review-trust-badges">
+          <div class="trust-badge">🔒 Verified Reviews</div>
+          <div class="trust-badge">✅ Published after approval</div>
+        </div>
+      </div>
+      <div class="review-submit-right">
+        <form id="testimonialForm">
+          {% csrf_token %}
+          <div class="review-form-row">
+            <div class="form-group">
+              <label>Your Full Name *</label>
+              <input type="text" name="name" placeholder="e.g. Rajesh Kumar" required>
+            </div>
+            <div class="form-group">
+              <label>Your Role / City</label>
+              <input type="text" name="role" placeholder="e.g. Homeowner, Dwarka">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Your Rating *</label>
+            <div class="star-rating" id="starRating">
+              <span class="star" data-val="1">★</span>
+              <span class="star" data-val="2">★</span>
+              <span class="star" data-val="3">★</span>
+              <span class="star" data-val="4">★</span>
+              <span class="star" data-val="5">★</span>
+            </div>
+            <input type="hidden" name="rating" id="ratingInput" value="5">
+          </div>
+          <div class="form-group">
+            <label>Your Review *</label>
+            <textarea name="text" rows="4" placeholder="Share your experience working with Capital Consultancy Services..." required></textarea>
+          </div>
+          <button type="submit" class="review-submit-btn" id="reviewSubmitBtn">Submit Review →</button>
+          <div id="reviewMsg" style="display:none;margin-top:14px;font-size:12px;letter-spacing:1px;"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ──────── CONTACT ──────── -->
+<section class="contact" id="contact">
+  <div class="section-header">
+    <div class="section-tag" style="color:var(--gold)">Get In Touch</div>
+    <h2 class="section-title">Begin Your <em style="color:var(--gold-light)">Journey</em></h2>
+    <p class="section-desc">Speak with one of our senior consultants today and let us find the perfect property for your needs.</p>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-info-item">
+        <div class="ci-icon">📍</div>
+        <div>
+          <div class="ci-label">Address</div>
+          <div class="ci-value">14, Janpath Road, Connaught Place<br>New Delhi – 110001</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="ci-icon">📞</div>
+        <div>
+          <div class="ci-label">Phone</div>
+          <div class="ci-value">+91 98765 43210<br>+91 11 4567 8900</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="ci-icon">✉️</div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-value">info@capitalconsultancy.in<br>properties@capitalconsultancy.in</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="ci-icon">🕐</div>
+        <div>
+          <div class="ci-label">Office Hours</div>
+          <div class="ci-value">Monday – Saturday: 9:30 AM – 7:00 PM<br>Sunday: By Appointment Only</div>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form" id="enquiryForm">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="full_name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="your@email.com">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Interested In</label>
+          <select name="interest">
+            <option>Buy a Property</option>
+            <option>Rent a Property</option>
+            <option>Investment Advisory</option>
+            <option>Commercial Lease</option>
+            <option>Property Management</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Budget Range</label>
+          <select name="budget">
+            <option>Under ₹50 Lakh</option>
+            <option>₹50L – ₹1 Crore</option>
+            <option>₹1Cr – ₹3 Crore</option>
+            <option>₹3Cr – ₹5 Crore</option>
+            <option>Above ₹5 Crore</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea name="message" rows="4" placeholder="Tell us about your requirements..."></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="submitBtn">Send Enquiry →</button>
+      <div id="formMsg" style="display:none;margin-top:12px;font-size:13px;color:var(--gold-light);letter-spacing:1px;"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ──────── FOOTER ──────── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Capital Consultancy</div>
+      <div class="footer-brand-tag">Premium Real Estate Services</div>
+      <p class="footer-desc">Since 2001, we have helped thousands of families and investors make smart real estate decisions across New Delhi and the NCR region.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">f</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">tw</a>
+        <a href="#" class="social-btn">ig</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Properties</div>
+      <ul class="footer-links">
+        <li><a href="#listings">Apartments</a></li>
+        <li><a href="#listings">Villas & Bungalows</a></li>
+        <li><a href="#listings">Commercial Spaces</a></li>
+        <li><a href="#listings">Luxury Residences</a></li>
+        <li><a href="#listings">New Launches</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Residential Sales</a></li>
+        <li><a href="#services">Commercial Leasing</a></li>
+        <li><a href="#services">Investment Advisory</a></li>
+        <li><a href="#services">Property Management</a></li>
+        <li><a href="#services">NRI Services</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="/admin/">Admin Panel</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Capital Consultancy Services Pvt. Ltd. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">RERA Compliance</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ──────── MODAL ──────── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-inner" id="modalInner"></div>
+  </div>
+</div>
+
+<!-- Property data from Django for JS modal -->
+<script>
+const PROPERTIES = [
+  {% for p in properties %}
+  {
+    id: {{ p.id }},
+    name: "{{ p.name|escapejs }}",
+    location: "{{ p.location|escapejs }}",
+    price: "{{ p.price|escapejs }}",
+    tag: "{{ p.tag|escapejs }}",
+    beds: "{{ p.beds|escapejs }}",
+    baths: "{{ p.baths|escapejs }}",
+    area: "{{ p.area|escapejs }}",
+    floor: "{{ p.floor|escapejs }}",
+    contact: "{{ p.contact|escapejs }}",
+    agent: "{{ p.agent|escapejs }}",
+    agentInitials: "{{ p.agent_initials|escapejs }}",
+    img: "{{ p.image_url|escapejs }}",
+    desc: "{{ p.description|escapejs }}"
+  }{% if not forloop.last %},{% endif %}
+  {% endfor %}
+];
+</script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+</body>
+</html>
